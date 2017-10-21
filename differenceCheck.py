@@ -33,8 +33,10 @@ differenceCheck(x,y):
 	geonames_resultX = geonames_client.find_timezone({xlat, xlong})
 	geonames_resultY = geonames_client.find_timezone({ylat, ylong})
 
-	print(geonames_resultX['timezoneId'])
-	print(geonames_resultY['timezoneId'])
+	# Test prints
+	# print(geonames_resultX['timezoneId'])
+	# print(geonames_resultY['timezoneId'])
 
+	# final variables available to other functions
 	xFinal = geonames_resultX['timezoneId']
 	yFinal = geonames_resultY['timezoneId']
