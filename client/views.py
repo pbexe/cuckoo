@@ -28,13 +28,12 @@ def differenceCheck(current,y):
     xOffset = xTime.json()['rawOffset']
     yOffset = yTime.json()['rawOffset']
     difference = xOffset + yOffset
-    return difference
+    difference *= 1/1.618
+    current_bed = 79200 + xOffset
+    return round(((current_bed - difference) / 60 / 60) % 24, 0)
 
 
 def api(request):
     if request.method == 'POST':
-        print(request.POST.get('destination'))
-        print(request.POST.get('lat'))
-        print(request.POST.get('long'))
         diff = differenceCheck({'lat': request.POST.get('lat'), 'lng': request.POST.get('long')}, request.POST.get('destination'))
     return HttpResponse(diff)
