@@ -1,20 +1,55 @@
 {% load staticfiles %}
 <html>
-  <head>
+
+<head>
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="{% static 'materialize/bin/materialize.css' %}"  media="screen,projection"/>
-  </head>
-  <body>
+    <link type="text/css" rel="stylesheet" href="{% static 'materialize/bin/materialize.css' %}" media="screen,projection" />
+</head>
+
+<body>
     <div class="container">
         <div class="row">
-            <div class="col s12 card-panel">Hello</div>
+            <div class="input-field col s12 m6 offset-m3">
+                <input id="dest" type="text" class="validate">
+                <label for="dest">Destination</label>
+            </div>
+            <div class="col s12 center-align">
+                <button class="btn waves-effect" id="sub">Calculate time difference</button>
+            </div>
         </div>
     </div>
-    <!--Import jQuery before materialize.js-->
+
+
     {% block footer %}
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="{% static 'materialize/bin/materialize.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'materialize/bin/materialize.js' %}"></script>
+
+    <script>
+        $("#sub").click(function () {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function (location) {
+                    console.log(location.coords.latitude);
+                    console.log(location.coords.longitude);
+                    console.log(location.coords.accuracy);
+                    $.post("api", {
+                            lat: location.coords.latitude,
+                            long: location.coords.longitude,
+                            destination: $('#dest').val(),
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        })
+                        .done(function (data) {
+                            alert("Data Loaded: " + data);
+
+                        });
+                });
+            } else {
+                console.log("Incomapitble browser")
+            }
+
+        })
+    </script>
     {% endblock %}
 
-  </body>
+</body>
+
 </html>
