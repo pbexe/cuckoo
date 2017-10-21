@@ -38,5 +38,18 @@ geonames_resultY = geonames_client.find_timezone({ylat, ylong})
 # print(geonames_resultY['timezoneId'])
 
 # final variables available to other functions
-xFinal = geonames_resultX['timezoneId']
-yFinal = geonames_resultY['timezoneId']
+# xFinal = geonames_resultX['timezoneId']
+# yFinal = geonames_resultY['timezoneId']
+
+# ALT METHOD (Doesn't use geonames module)
+urlX = "http://api.geonames.org/timezoneJSON?formatted=true&lat={}&lng={}&username=demo".format(xLat,xLong)
+urlY = "http://api.geonames.org/timezoneJSON?formatted=true&lat={}&lng={}&username=demo".format(yLat,yLong)
+
+rX = requests.get(urlX) ## Make a request
+rY = requests.get(urlY) ## Make a request
+xFinal = rX.json()['timezoneId'] ## return the timezone
+YFinal = rY.json()['timezoneId'] ## return the timezone
+
+
+
+
