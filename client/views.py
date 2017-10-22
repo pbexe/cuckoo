@@ -30,7 +30,7 @@ def differenceCheck(current,y):
     difference = xOffset + yOffset
     difference *= 1/1.618
     current_bed = 79200 + xOffset
-    return round(((current_bed - difference) / 60 / 60) % 24, 0)
+    return int(round(((current_bed - difference) / 60 / 60) % 24, 0))
 
 
 def api(request):
