@@ -4,22 +4,23 @@
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{% static 'materialize/bin/materialize.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="static/main.css" media="screen,projection" />
 </head>
 
-<body>
-    <div class="container">
-        <div class="row">
+<body class="blue">
+    <div class="wrapper card-panel">
+        <div class="row center-align">
             <div class="col s12 m6 offset-m3">
                 <img class="responsive-img" src="static/logo.png">
             </div>
         </div>
-        <div class="row">
+        <div class="row center-align">
             <div class="input-field col s12 m6 offset-m3">
                 <input id="dest" type="text" class="validate">
                 <label for="dest">Destination</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row center-align">
             <div class="input-field col s12 m3 offset-m3">
                 <input id="sleep" type="text" class="validate">
                 <label for="sleep">Hours Sleep</label>
@@ -34,7 +35,7 @@
 
         </div>
 
-        <div id="contain">
+        <div id="contain" class="center-align">
             
         </div>
     </div>
@@ -63,13 +64,13 @@
                             console.log(data)
                             data = JSON.parse(data)
                             $("#contain").empty();
-                            $("#contain").append("<div class='col s12 m6 offset-m3 card-panel' id ='content'>")
-                            $("#content").append("<h4>" + data['xname'] + ":</h4>");
-                            $("#content").append("You should go to bed at " + data['x'] + "<br />");
-                            $("#content").append("You should get up at " + data['xget']) + "<br />";
-                            $("#content").append("<h4>" + data['yname'] + ":</h4>");
+                            $("#content").append("<h4>" + data['yname'] + "</h4>");
                             $("#content").append("You should go to bed at " + data['y'] + "<br />");
                             $("#content").append("You should get up at " + data['yget']+  "<br />");
+                            $("#contain").append("<div class='col s12 m6 offset-m3' id ='content'>")
+                            $("#content").append("<h4>" + data['xname'] + "</h4>");
+                            $("#content").append("You should go to bed at " + data['x'] + "<br />");
+                            $("#content").append("You should get up at " + data['xget']) + "<br />";
 
                         });
                 });
