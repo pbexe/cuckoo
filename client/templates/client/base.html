@@ -13,9 +13,24 @@
                 <input id="dest" type="text" class="validate">
                 <label for="dest">Destination</label>
             </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m3 offset-m3">
+                <input id="sleep" type="text" class="validate">
+                <label for="sleep">Hours Sleep</label>
+            </div>
+            <div class="input-field col s12 m3">
+                <input id="bed" type="text" class="validate">
+                <label for="bed">Usual Bed Time</label>
+            </div>
             <div class="col s12 center-align">
                 <button class="btn waves-effect" id="sub">Calculate time difference</button>
             </div>
+
+        </div>
+
+        <div id="contain">
+            
         </div>
     </div>
 
@@ -34,11 +49,17 @@
                     $.post("api", {
                             lat: location.coords.latitude,
                             long: location.coords.longitude,
+                            sleep: $('#sleep').val(),
+                            bed: $('#bed').val(),
                             destination: $('#dest').val(),
                             csrfmiddlewaretoken: '{{ csrf_token }}'
                         })
                         .done(function (data) {
-                            alert("Time difference: " + data);
+                            console.log(data)
+                            data = JSON.parse(data)
+                            $("#contain").append("<div class='col s12 m6 offset-m3 card-panel'>")
+                            $("#contain").append("<h3>" + data['xname'] + "</h3>");
+                            $("#contain").append("");
 
                         });
                 });
