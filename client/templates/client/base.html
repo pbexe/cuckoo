@@ -57,9 +57,14 @@
                         .done(function (data) {
                             console.log(data)
                             data = JSON.parse(data)
-                            $("#contain").append("<div class='col s12 m6 offset-m3 card-panel'>")
-                            $("#contain").append("<h3>" + data['xname'] + "</h3>");
-                            $("#contain").append("");
+                            $("#contain").empty();
+                            $("#contain").append("<div class='col s12 m6 offset-m3 card-panel' id ='content'>")
+                            $("#content").append("<h4>" + data['xname'] + ":</h4>");
+                            $("#content").append("You should go to bed at " + data['x'] + "<br />");
+                            $("#content").append("You should get up at " + data['xget']) + "<br />";
+                            $("#content").append("<h4>" + data['yname'] + ":</h4>");
+                            $("#content").append("You should go to bed at " + data['y'] + "<br />");
+                            $("#content").append("You should get up at " + data['yget']+  "<br />");
 
                         });
                 });
